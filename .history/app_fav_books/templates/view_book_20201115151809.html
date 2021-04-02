@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <p>book title:{{book.title}}</p>
+        <br/>
+
+        <p>Added by:{{book.uploaded_by_id.}}</p>
+        <br/>
+
+        <p>Added on:{{book.created_at}}</p>
+        <br/>
+
+        <p>Updated at:{{book.updated_at}}</p>
+        <br/>
+
+        <p>Description{{book.desc}}</p>
+
+        
+    </body>
+</html>

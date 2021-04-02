@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <p>Welcome, {{user.first_name}}</p>
+        <a href="/logout">log out</a>
+
+        <!-- view books -->
+        <h1>Books</h1>
+        <ol>               
+             {% for book in all_books %}
+             <li>
+                <a href="/books/{{book.id}}">{{book.title}}</a>
+                <p>added by: {{book.uploaded_by.first_name}}</p>
+             </li>
+            {% endfor %}
+        </ol>
+
+
+        <!-- add book form -->
+        <h1>Add Book</h1>
+        <form action="/books/add" method="post">
+            {% csrf_token %}
+
+            <label for="title">First Name</label>
+            <input type="text" name="first_name" />
+            <br/>
+
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name"/>
+            <br/>
+
+            <label for="email">Email</label>
+            <input type="text" name="email"/>
+            <br/>
+        
+
+            <label for="password">Password</label>
+            <input type="password" name="password"/>
+            <br/>
+
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" name="confirm_password"/>
+            <br/>
+    
+            <button type="submit">Register</button>
+            <br/>
+    
+        </form>
+
+
+
+    </body>
+</html>

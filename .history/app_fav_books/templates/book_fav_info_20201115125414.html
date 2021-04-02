@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <h1>HAIII</h1>
+        {% for book in all_books %}
+            <p>book title:{{book.title}}</p>
+            <br>
+            <p>Added by:{{book.user_id.uploaded_by}}</p>
+            <br>
+            <p></p>
+            {% endfor %}
+
+        
+    </body>
+</html>

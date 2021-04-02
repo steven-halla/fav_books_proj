@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <p>Welcome, {{user.first_name}}</p>
+        <a href="/logout">log out</a>
+
+        <h1>Books</h1>
+        <ol>               
+             {% for book in all_books %}
+             <li>
+
+             </li>
+            {% endfor %}
+        </ol>
+    </body>
+</html>

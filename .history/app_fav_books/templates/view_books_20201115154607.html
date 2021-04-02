@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <p>Welcome, {{user.first_name}}</p>
+        <a href="/logout">log out</a>
+
+        <!-- view favorite books -->
+        <h1>Favorite Books</h1>
+        <ol>               
+            {% for book in all_books %}
+            <li>
+                <a href="/books/{{book.id}}">{{book.title}}</a>
+                <p>added by: {{book.uploaded_by.first_name}}</p>
+            </li>
+            {% endfor %}
+        </ol>
+
+
+        <!-- view all books -->
+        <h1>Books</h1>
+        <ol>               
+            {% for book in all_books %}
+            <li>
+                <a href="/books/{{book.id}}">{{book.title}}</a>
+                <p>added by: {{book.uploaded_by.first_name}}</p>
+            </li>
+            {% endfor %}
+        </ol>
+
+        <!-- errors for adding a book -->
+        {% if messages %}
+            Errors:
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- add book form -->
+        <h1>Add Book</h1>
+        <form action="/books/add" method="post">
+            {% csrf_token %}
+
+            <label for="title">Title</label>
+            <input type="text" name="title" />
+            <br/>
+
+            <label for="desc">Description</label>
+            <textarea name="desc"></textarea>
+            <br/>
+    
+            <button type="submit">Register</button>
+            <br/>
+    
+        </form>
+
+
+
+    </body>
+</html>

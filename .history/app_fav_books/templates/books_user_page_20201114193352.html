@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <p>success!Welcome,{{user.first_name}}</p>
+        <a href="/logout">log out</a>
+
+        <h1>add a favorite book</h1>
+        <form action="register/books/add">
+            {% csrf_token %}
+            <input type="text" name="title">title
+            <br>
+            <br>
+            <input type="text" name="desc">description
+            <br>
+            <br>
+            <button type="submit">Add Book</button>
+        </form>
+        <h1>All Books</h1>
+
+        {% for book in all_books %}
+            <p>{{book.name}}</p>
+            <p>hai</p>
+            <ol>
+            {% for user in all_users %}
+                {% if user.book.id == book.id %}
+                    <li>{{user.first_name}} {{user.last_name}}</li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+            </ol>
+    </body>
+</html>

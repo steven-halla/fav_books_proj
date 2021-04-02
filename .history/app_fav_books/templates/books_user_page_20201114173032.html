@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <p>success!Welcome,{{user.first_name}}</p>
+        <a href="/logout">log out</a>
+
+        <h1>add a favorite book</h1>
+        <form action="">
+            <input type="text">title
+            <br>
+            <br>
+            <input type="text">description
+            <br>
+            <br>
+            <button type="submit">Add Book</button>
+        </form>
+        <h1>All Books</h1>
+
+    </body>
+</html>

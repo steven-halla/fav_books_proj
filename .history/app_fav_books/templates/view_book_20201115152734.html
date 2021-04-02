@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <!-- view book -->
+        <a href="/books">Back to books</a>
+
+        <p>Title: {{book.title}}</p>
+
+        <p>Description: {{book.desc}}</p>
+
+        <p>Added by: {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p>
+
+        <p>Added on: {{book.created_at}}</p>
+
+        <p>Updated at: {{book.updated_at}}</p>
+
+
+        {% if booo
+        <form action="/books/{{book.id}}/favorite" method="post">
+            {% csrf_token %}
+    
+            <button type="submit">Favorite</button>
+        
+        </form>
+
+    </body>
+</html>

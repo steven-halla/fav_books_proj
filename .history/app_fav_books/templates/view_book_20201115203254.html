@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <!-- view book -->
+        <a href="/books">Back to books</a>
+
+        <p>Title: {{book.title}}</p>
+
+        <p>Description: {{book.desc}}</p>
+
+        <p>Added by: {{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</p>
+
+        <p>Added on: {{book.created_at}}</p>
+
+        <p>Updated at: {{book.updated_at}}</p>
+
+        <p>Favorited by:</p>
+        <ol>               
+            <!-- don't forget to add .all() for many-to-many relationship data -->
+            {% for user in book.users_who_favorite.all %}
+            <li>
+                <p>{{user.first_name}} {{user.last_name}}</p>
+            </li>
+            {% endfor %}
+        </ol>
+
+        <!-- if you don't own book, allow to favorite. by default all users favorite their own books when we add the book. -->
+        {% if book.uploaded_by.id != user.id %}
+            <form action="/books/{{book.id}}/favorite" method="post">
+                {% csrf_token %}
+                <button type="submit">Favorite</button>
+            </form>
+        {% endif %}
+
+
+        <!-- if user owns book, allow them to update it and delete -->
+        {% if book.uploaded_by.id == user.id %}
+            <h1>Edit Book</h1>
+            <!-- form for edit -->
+            
+            <form action="/books/{{book.id}}/edit" method="post">
+                {% csrf_token %}
+                <label for="title">title</label>
+                <textarea name="title">{{book.title}}</textarea>
+                <br>
+                <br>
+
+                <label for="desc">Description</label>
+                <textarea name="desc">{{book.desc}}</textarea>
+                <br/>
+        
+                <button type="submit">Update</button>
+                <br/>
+    
+            </form>
+            
+            <br/>
+            <!-- form for delete -->
+            <form action="/books/{{book.id}}/delete" method="post">
+                {% csrf_token %}
+
+                <button type="submit" method="post">Delete</button>
+                <br/>
+    
+            </form>
+            <br/>
+
+            <!-- form for unfavorte-->
+           
+        {% endif %}
+
+
+    </body>
+</html>

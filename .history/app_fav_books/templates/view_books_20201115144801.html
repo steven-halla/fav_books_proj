@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load static %}
+
+        <meta charset="utf-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">    
+        <script src="{% static 'js/script.js' %}"></script>
+    </head>
+
+    <body>
+        <p>Welcome, {{user.first_name}}</p>
+        <a href="/logout">log out</a>
+
+        <h1>add a favorite book</h1>
+        <form action="/register/books/add" method="post">
+            {% csrf_token %}
+
+            <label for="title">Title</label>
+            <input type="text" name="title"/>
+            <br/>
+
+            <label for="description">Description</label>
+            <textarea name="description">
+            <br/>
+            <input type="text" name="desc">description
+            <br>
+            <br>
+            <button type="submit">Add Book</button>
+            <br>
+            <br>
+            <h1>All books</h1>
+                {% for book in all_books %}
+                    <a href="/books/{{book.id}}">{{book.title}}</a>
+                    <p>added by:{{book.uploaded_by.first_name}}</p>
+                    
+                    
+                {% endfor %}
+            </ol>
+        </form>
+
+        
+    </body>
+</html>
